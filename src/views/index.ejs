@@ -1,0 +1,74 @@
+<% include partials/_header %>
+
+<div class="container" style="margin-top: 30px;">
+
+  <div class="row">
+    <!--FORM-->
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body bg-warning">
+          <h3 style="color: blueviolet;margin-left: 70px;">Ingreso de platos</h3>
+          <form action="/add" method="post">
+            <div class="form-group">
+              <input class="form-control" type="text" name="title" placeholder=" nombre plato">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="description" cols="80"
+                placeholder="Ingrese una Descripción"
+                ></textarea>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="number" name="precio" placeholder="precio plato">
+            </div>
+            <button class="btn btn-primary" type="submit">
+              Agregar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="col-md-7 bg-info">
+    <div style="margin-top: 20px; margin-bottom: 10px;">
+      <h3 style="color: blueviolet;margin-left: 200px;">Listado de platos</h3>
+    </div>
+      <table class="table table-bordered table-dark">
+        <thead>
+          <tr class="table-primary">
+            <th>N°</th>
+            <th>plato</th>
+            <th>Descripción</th>
+            <th>precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < tasks.length; i++) { %>
+            <tr class="table-light">
+              <td style="color: black;"><%= i + 1%></td>
+              <td style="color: black;"><strong><%= tasks[i].title %></strong></td>
+              <td style="color: black;"><%= tasks[i].description %></td>
+              <td style="color: black;"><%= tasks[i].precio %></td>
+              <td>
+                <a
+                  class="<%= tasks[i].status ? 'btn btn-success' : 'btn btn-dark'%>"
+                  href="/turn/<%= tasks[i]._id %>">disponibilidad</a>
+                <a href="/delete/<%= tasks[i]._id %>"
+                  class="btn btn-danger">
+                  Borrar
+                </a>
+                <a href="/edit/<%= tasks[i]._id %>" class="btn btn-warning">
+                  Editar
+                </a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+<% include partials/_footer%>
